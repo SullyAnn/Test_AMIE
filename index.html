@@ -2,21 +2,56 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mon Gabarit de Base</title>
+    <title>Carrousel JS</title>
+    <style>
+        .carousel-container {
+            width: 300px;
+            overflow: hidden;
+        }
+
+        .carousel-slides {
+            display: flex;
+            transition: all 0.3s;
+        }
+
+        .carousel-slide {
+            min-width: 300px;
+        }
+    </style>
 </head>
 <body>
-    <audio controls autoplay>
-        <source src="https://drive.google.com/uc?id=1TVVKzFS08TLPPcwl-BuKBaJXjcSlTfUt" type="audio/mp4">
-        Votre navigateur ne supporte pas la balise audio.
-    </audio>
-    
-</body>
-</html> 
 
-<script> 
+<div class="carousel-container">
+    <div class="carousel-slides">
+        <img src="/Medias/test.png" alt="Slide 1" class="carousel-slide">
+        <img src="/Medias/test.png" alt="Slide 2" class="carousel-slide">
+        <img src="/Medias/test.png" alt="Slide 3" class="carousel-slide">
+        <!-- ... -->
+    </div>
+</div>
+<button onclick="previousSlide()">Précédent</button>
+<button onclick="nextSlide()">Suivant</button>
+
+<script>
+    let currentIndex = 0;
+    const slides = document.querySelectorAll('.carousel-slide');
+    const totalSlides = slides.length;
+
+    function nextSlide() {
+        currentIndex = (currentIndex + 1) % totalSlides; // Wrap around
+        updateCarousel();
+    }
+
+    function previousSlide() {
+        currentIndex = (currentIndex - 1 + totalSlides) % totalSlides; // Wrap around
+        updateCarousel();
+    }
+
+    function updateCarousel() {
+        const offset = -currentIndex * 300; // width of slide
+        document.querySelector('.carousel-slides').style.transform = `translateX(${offset}px)`;
+    }
 </script>
 
-<style>
-</style>
+</body>
+</html>
