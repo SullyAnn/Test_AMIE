@@ -2,7 +2,9 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Carrousel JS</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+    <title>Carrousel jQuery</title>
     <style>
         .carousel-container {
             width: 300px;
@@ -25,31 +27,32 @@
     <div class="carousel-slides">
         <img src="./Medias/test.png" alt="Slide 1" class="carousel-slide">
         <img src="./Medias/test.png" alt="Slide 2" class="carousel-slide">
-        <img src="./Medias/test.png" alt="Slide 3" class="carousel-slide">
+        <img src="./Medias/test.png" alt="Slide 2" class="carousel-slide">
         <!-- ... -->
     </div>
 </div>
-<button onclick="previousSlide()">Précédent</button>
-<button onclick="nextSlide()">Suivant</button>
+<button id="prevBtn">Précédent</button>
+<button id="nextBtn">Suivant</button>
 
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script>
     let currentIndex = 0;
-    const slides = document.querySelectorAll('.carousel-slide');
+    const slides = $('.carousel-slide');
     const totalSlides = slides.length;
 
-    function nextSlide() {
+    $('#nextBtn').click(() => {
         currentIndex = (currentIndex + 1) % totalSlides; // Wrap around
         updateCarousel();
-    }
+    });
 
-    function previousSlide() {
+    $('#prevBtn').click(() => {
         currentIndex = (currentIndex - 1 + totalSlides) % totalSlides; // Wrap around
         updateCarousel();
-    }
+    });
 
     function updateCarousel() {
         const offset = -currentIndex * 300; // width of slide
-        document.querySelector('.carousel-slides').style.transform = `translateX(${offset}px)`;
+        $('.carousel-slides').css('transform', `translateX(${offset}px)`);
     }
 </script>
 
